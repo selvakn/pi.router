@@ -1,0 +1,8 @@
+---
+
+- shell: whoami
+  register: iam
+  become: yes
+
+- debug:
+    var: iam
