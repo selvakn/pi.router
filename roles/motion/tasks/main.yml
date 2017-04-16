@@ -1,0 +1,19 @@
+---
+
+- name: Install the package
+  apt:
+    name: motion
+
+- copy:
+    src: "{{ role_path }}/files/etc_defaults_motion"
+    dest: /etc/default/motion
+
+- template:
+    src: "{{ role_path }}/templates/motion.conf.j2"
+    dest: /etc/motion/motion.conf
+
+- name: enable service
+  systemd:
+    name: motion
+    state: started
+    enabled: yes

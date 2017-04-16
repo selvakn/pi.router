@@ -1,3 +1,15 @@
 - hosts: all
   roles:
-    - role: test
+    - role: vitalk.secure-ssh
+      ssh_identity_key: "{{ secure_ssh.ssh_identity_key }}"
+      ssh_user: "{{ ansible_ssh_user }}"
+      become: yes
+      when: secure_ssh.enabled
+
+    - role: routing
+      become: yes
+      when: routing.enabled
+
+    - role: zerotier
+      become: yes
+      when: zerotier.enabled

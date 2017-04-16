@@ -1,0 +1,45 @@
+---
+secure_ssh:
+  enabled: true
+  ssh_identity_key: ~/.ssh/id_rsa.pub
+
+routing:
+  enabled: true
+  public_interface: eth1     # DHCP Always
+  internal_interface: eth2   # Always static and runs DHCP on it
+  internet_interface: eth1   # Can be either public interface or ppp0
+
+zerotier:
+  enabled: true
+  networks: ["565799d8f6abcxyz"]
+
+motion:
+  enabled: true
+  output_pictures: "off"
+  timelapse_on_seconds: 2
+  target_dir: "/tmp/motion"
+  stream_localhost: "off"
+  stream_authentication: "admin:password"
+
+network_interfaces:
+  - device: "{{ routing.internal_interface }}"
+    description: Internal Interface
+    auto: true
+    family: inet
+    method: static
+    address: 192.168.10.1/24
+    network: 192.168.10.0
+    broadcast: 193.168.10.255
+    gateway: 192.168.10.1
+    subnets: ["192.168.10.0/24"]
+  - device: "{{ routing.public_interface }}"
+    description: Public Interface
+    auto: true
+    family: inet
+    method: "dhcp"
+
+dhcpd_subnets:
+  - subnet: "192.168.10.0/255.255.255.0"
+    routers: [ "192.168.10.1" ]
+    pools:
+      - range: '192.168.10.20 192.168.10.200'

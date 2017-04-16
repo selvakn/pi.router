@@ -1,0 +1,32 @@
+---
+
+- copy:
+    src: "{{ role_path }}/files/zt-gpg-key"
+    dest: /tmp/zt-gpg-key
+
+- apt_key:
+    file: /tmp/zt-gpg-key
+  become: yes
+
+- apt_repository:
+    repo: "deb http://download.zerotier.com/{{ ansible_distribution | lower }}/{{ ansible_distribution_release }} {{ ansible_distribution_release }} main"
+    state: present
+    filename: 'zerotier'
+  become: yes
+
+- name: Install the package
+  apt:
+    name: zerotier-one
+    update_cache: yes
+  become: yes
+
+- name: enable service
+  systemd:
+    name: zerotier-one
+    state: started
+    enabled: yes
+
+- name: Join networks
+  shell: "zerotier-cli join {{ item }}"
+  with_items: "{{ zerotier.networks }}"
+  become: yes

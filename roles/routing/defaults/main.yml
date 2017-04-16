@@ -1,0 +1,4 @@
+routing:
+  public_interface: eth0     # DHCP Always
+  internal_interface: eth1   # Always static and runs DHCP on it
+  internet_interface: eth0   # Can be either public interface or ppp0

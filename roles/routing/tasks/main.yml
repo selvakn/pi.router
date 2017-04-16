@@ -1,0 +1,20 @@
+---
+- name: Install all the necessary packages for routing
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    cache_valid_time: 3600
+  with_items:
+    - iptables
+    - miniupnpd
+
+- name: enable service
+  systemd:
+    name: miniupnpd
+    state: started
+    enabled: yes
+
+- sysctl:
+    name: net.ipv4.ip_forward
+    value: 1
+    sysctl_set: yes

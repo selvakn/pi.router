@@ -1,0 +1,12 @@
+motion:
+  width: 1024
+  height: 768
+  framerate: 10
+  threshold: 1500
+  output_pictures: "on"
+  timelapse_on_seconds: 5
+  target_dir: "/var/lib/motion"
+  stream_port: 8081
+  stream_quality: 50
+  stream_maxrate: 1
+  stream_localhost: "on"
