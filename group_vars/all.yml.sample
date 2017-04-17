@@ -24,13 +24,12 @@ motion:
 network_interfaces:
   - device: "{{ routing.internal_interface }}"
     description: Internal Interface
-    auto: False
+    auto: True
     family: inet
     method: static
     address: 192.168.10.1/24
     network: 192.168.10.0
     broadcast: 193.168.10.255
-    gateway: 192.168.10.1
     subnets: ["192.168.10.0/24"]
   - device: "{{ routing.public_interface }}"
     description: Public Interface

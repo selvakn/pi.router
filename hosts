@@ -1,2 +1,2 @@
 [router]
-192.168.5.46 ansible_user=pi
+172.30.1.4 ansible_user=pi

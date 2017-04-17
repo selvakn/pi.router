@@ -9,6 +9,7 @@
     - role: routing
       become: yes
       when: routing.enabled
+      tags: ["routing"]
 
     - role: zerotier
       become: yes
