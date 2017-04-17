@@ -19,9 +19,12 @@ Setup
 `cp group_vars/all.yml.sample group_vars/all.yml`
 \# It has sane defaults, but you should modify it to suite your needs.
 
+`vi hosts`
 \# Modify `hosts` file to point to your rpi or equivalent device
 
 `ansible-galaxy install -r requirements.yml`
+
+`ansible-playbook -i hosts site.yml [--ask-pass]`
 
 Once installation is complete, connect your workstation to your `internal_interface` of your rpi and you should be assigned DHCP ip in the configured range!
 

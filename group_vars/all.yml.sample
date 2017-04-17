@@ -24,7 +24,7 @@ motion:
 network_interfaces:
   - device: "{{ routing.internal_interface }}"
     description: Internal Interface
-    auto: true
+    auto: False
     family: inet
     method: static
     address: 192.168.10.1/24
@@ -34,7 +34,7 @@ network_interfaces:
     subnets: ["192.168.10.0/24"]
   - device: "{{ routing.public_interface }}"
     description: Public Interface
-    auto: true
+    auto: False
     family: inet
     method: "dhcp"
 

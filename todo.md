@@ -5,3 +5,4 @@ Pending Items
 * readonly file system
 * vpn endpoint
 * caddy with status page (with authentication)
+* fail2ban
