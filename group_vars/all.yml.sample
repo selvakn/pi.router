@@ -1,20 +1,20 @@
 ---
 secure_ssh:
-  enabled: true
+  enabled: True
   ssh_identity_key: ~/.ssh/id_rsa.pub
 
 routing:
-  enabled: true
+  enabled: True
   public_interface: eth1     # DHCP Always
   internal_interface: eth2   # Always static and runs DHCP on it
   internet_interface: eth1   # Can be either public interface or ppp0
 
 zerotier:
-  enabled: true
+  enabled: True
   networks: ["565799d8f6abcxyz"]
 
 motion:
-  enabled: true
+  enabled: True
   output_pictures: "off"
   timelapse_on_seconds: 2
   target_dir: "/tmp/motion"

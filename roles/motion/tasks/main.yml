@@ -5,7 +5,7 @@
     name: motion
 
 - copy:
-    src: "{{ role_path }}/files/etc_defaults_motion"
+    src: "{{ role_path }}/files/etc_default_motion"
     dest: /etc/default/motion
 
 - template:

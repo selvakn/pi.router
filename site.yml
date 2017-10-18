@@ -14,3 +14,8 @@
     - role: zerotier
       become: yes
       when: zerotier.enabled
+
+    - role: motion
+      become: yes
+      when: motion.enabled
+      tags: ["motion"]

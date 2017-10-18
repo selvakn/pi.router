@@ -11,6 +11,12 @@ dependencies:
     dhcpd_nameservers: ["8.8.8.8", "8.8.4.4"]
 
   - role: geerlingguy.firewall
+    firewall_allowed_tcp_ports:
+      - "22"
+      - "80"
+      - "443"
+      - "8080"
+      - "8081"
     firewall_additional_rules:
       - "iptables -A FORWARD -i {{ routing.internal_interface }} -j ACCEPT"
       - "iptables -t nat -A POSTROUTING -o {{ routing.internet_interface }} -j MASQUERADE"
