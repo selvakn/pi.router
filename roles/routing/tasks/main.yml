@@ -18,3 +18,34 @@
     name: net.ipv4.ip_forward
     value: 1
     sysctl_set: yes
+
+- name: configure interfaces
+  include_role:
+    name: dresden-weekly.network-interfaces
+  vars:
+    network_manage_devices: no
+    network_restart_method: interface
+  become: yes
+
+- name: install dhcpd
+  include_role:
+    name: debops.dhcpd
+  vars:
+    dhcpd_authoritative: True
+    dhcpd_interfaces: [ "{{ routing.internal_interface }}" ]
+    dhcpd_lease_time: 2400
+    dhcpd_nameservers: ["8.8.8.8", "8.8.4.4"]
+
+- name: configure firewall
+  include_role:
+    name: geerlingguy.firewall
+  vars:
+    firewall_additional_rules:
+      - "iptables -A FORWARD -i {{ routing.internal_interface }} -j ACCEPT"
+      - "iptables -t nat -A POSTROUTING -o {{ routing.internet_interface }} -j MASQUERADE"
+      - "iptables -A FORWARD -i {{ routing.internet_interface }} -o {{ routing.internal_interface }} -m state --state RELATED,ESTABLISHED -j ACCEPT"
+      - "iptables -A FORWARD -i {{ routing.internal_interface }} -o {{ routing.internet_interface }} -j ACCEPT"
+    firewall_allowed_tcp_ports:
+      - "22"
+      - "80"
+      - "443"

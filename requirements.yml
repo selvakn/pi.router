@@ -2,7 +2,7 @@
 - src: vitalk.secure-ssh
   version: 0.2.0
 - src: geerlingguy.firewall
-  version: 2.1.2
+  version: 2.3.0
 - src: debops.dhcpd
   version: v0.1.2
 - src: debops.secret
