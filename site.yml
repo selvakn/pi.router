@@ -19,3 +19,7 @@
       become: yes
       when: motion.enabled
       tags: ["motion"]
+
+    - role: rofs
+      become: yes
+      tags: ["rofs"]

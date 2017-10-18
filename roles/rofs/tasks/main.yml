@@ -1,0 +1,27 @@
+---
+- name: Install all the necessary packages
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - lsof
+    - busybox-syslogd
+
+- name: Remove rsyslog
+  apt:
+    name: rsyslog
+    state: absent
+    purge: yes
+
+- name: Mount RO filesystem for dhcpd
+  mount:
+    path: /var/lib/dhcp
+    src: tmpfs
+    fstype: tmpfs
+    opts: 'defaults,noatime,mode=0755'
+    state: mounted
+
+- name: Create root RO mount script
+  copy:
+    src: files/mountfs.sh
+    dest: ~/
+    mode: 0755
