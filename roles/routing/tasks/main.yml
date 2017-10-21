@@ -2,8 +2,6 @@
 - name: Install all the necessary packages for routing
   apt:
     name: "{{ item }}"
-    update_cache: yes
-    cache_valid_time: 3600
   with_items:
     - iptables
     - miniupnpd
@@ -35,17 +33,3 @@
     dhcpd_interfaces: [ "{{ routing.internal_interface }}" ]
     dhcpd_lease_time: 2400
     dhcpd_nameservers: ["8.8.8.8", "8.8.4.4"]
-
-- name: configure firewall
-  include_role:
-    name: geerlingguy.firewall
-  vars:
-    firewall_additional_rules:
-      - "iptables -A FORWARD -i {{ routing.internal_interface }} -j ACCEPT"
-      - "iptables -t nat -A POSTROUTING -o {{ routing.internet_interface }} -j MASQUERADE"
-      - "iptables -A FORWARD -i {{ routing.internet_interface }} -o {{ routing.internal_interface }} -m state --state RELATED,ESTABLISHED -j ACCEPT"
-      - "iptables -A FORWARD -i {{ routing.internal_interface }} -o {{ routing.internet_interface }} -j ACCEPT"
-    firewall_allowed_tcp_ports:
-      - "22"
-      - "80"
-      - "443"

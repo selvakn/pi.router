@@ -1,2 +1,2 @@
 [router]
-172.30.1.4 ansible_user=pi
+192.168.5.1 ansible_user=selva

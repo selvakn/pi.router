@@ -11,6 +11,10 @@
       when: routing.enabled
       tags: ["routing"]
 
+    - role: geerlingguy.firewall
+      become: yes
+      when: routing.enabled
+
     - role: zerotier
       become: yes
       when: zerotier.enabled
@@ -23,3 +27,8 @@
     - role: rofs
       become: yes
       tags: ["rofs"]
+
+    - role: geerlingguy.nfs
+      when: nfs.enabled
+      become: yes
+      tags: ["nfs"]

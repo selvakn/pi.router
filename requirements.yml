@@ -7,3 +7,6 @@
   version: v0.1.2
 - src: debops.secret
 - src: dresden-weekly.network-interfaces
+- src: geerlingguy.nfs
+  version: 1.2.1
+
